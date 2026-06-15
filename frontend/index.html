@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Melolo partner content gateway for premium and exclusive video catalog access." />
+    <title>Melolo Partner Gateway</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+
+    <header class="site-header">
+      <a class="brand" href="#hero" aria-label="Melolo Partner Gateway home">
+        <span class="brand-mark">M</span>
+        <span>Melolo<span class="muted">Gateway</span></span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#catalog">Catalog</a>
+        <a href="#exclusive">Exclusive</a>
+        <a href="#api-console">API Console</a>
+      </nav>
+      <a class="header-cta" href="#api-console">Connect API</a>
+    </header>
+
+    <main>
+      <section class="hero" id="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Private content distribution layer</p>
+          <h1>Premium video catalog, delivered through a cinematic partner API.</h1>
+          <p class="hero-text">
+            Frontend modern untuk mengeksplor catalog Melolo, memvalidasi API key partner,
+            dan menampilkan signed video URL hanya ketika tier akses memenuhi syarat.
+          </p>
+          <div class="hero-actions">
+            <a class="primary-button" href="#catalog">Explore catalog</a>
+            <a class="secondary-button" href="/api/v1/docs">Open Swagger</a>
+          </div>
+          <dl class="metrics" aria-label="Gateway highlights">
+            <div>
+              <dt>3</dt>
+              <dd>Access tiers</dd>
+            </div>
+            <div>
+              <dt>10m</dt>
+              <dd>Signed URL TTL</dd>
+            </div>
+            <div>
+              <dt>REST</dt>
+              <dd>JSON delivery</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="hero-stage" aria-label="Featured exclusive episode preview">
+          <div class="poster-card">
+            <div class="poster-toolbar">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="poster-art">
+              <span class="premium-pill">Exclusive</span>
+              <button class="play-button" aria-label="Preview exclusive episode">▶</button>
+            </div>
+            <div class="poster-meta">
+              <div>
+                <p class="label">Now signing</p>
+                <h2>Midnight Archive</h2>
+              </div>
+              <span class="status-dot">secure</span>
+            </div>
+          </div>
+          <aside class="floating-panel">
+            <p>video_url</p>
+            <code>https://cdn.melolo.com/...&amp;sig=7fa2</code>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section-heading" id="catalog">
+        <p class="eyebrow">Curated feed</p>
+        <h2>Editorial catalog built for partner websites.</h2>
+        <p>Filter konten free, premium, dan exclusive dalam interface yang bersih dan responsif.</p>
+      </section>
+
+      <section class="toolbar" aria-label="Catalog controls">
+        <div class="search-box">
+          <span>⌕</span>
+          <input id="searchInput" type="search" placeholder="Cari judul atau genre..." autocomplete="off" />
+        </div>
+        <div class="tier-tabs" role="tablist" aria-label="Access tier filter">
+          <button class="tier-tab active" data-tier="all">All</button>
+          <button class="tier-tab" data-tier="free">Free</button>
+          <button class="tier-tab" data-tier="premium">Premium</button>
+          <button class="tier-tab" data-tier="exclusive">Exclusive</button>
+        </div>
+      </section>
+
+      <section class="catalog-grid" id="catalogGrid" aria-live="polite"></section>
+
+      <section class="exclusive-band" id="exclusive">
+        <div>
+          <p class="eyebrow">Protected streaming</p>
+          <h2>Exclusive videos stay gated beyond the UI.</h2>
+          <p>
+            UI ini tidak pernah menyimpan file video asli. Ketika partner berhak mengakses,
+            frontend hanya menampilkan signed URL dari backend yang memiliki expiry dan signature.
+          </p>
+        </div>
+        <div class="security-stack">
+          <span>API key auth</span>
+          <span>Tier-aware video_url</span>
+          <span>HMAC signed URL</span>
+          <span>Rate limited</span>
+        </div>
+      </section>
+
+      <section class="api-console" id="api-console">
+        <div class="console-copy">
+          <p class="eyebrow">Partner API console</p>
+          <h2>Connect to the live FastAPI backend.</h2>
+          <p>
+            Masukkan API base URL dan API key partner untuk mengambil data real dari endpoint
+            <code>/api/v1/series</code>, <code>/api/v1/exclusive</code>, atau pencarian.
+          </p>
+        </div>
+        <form class="console-card" id="apiForm">
+          <label>
+            API base URL
+            <input id="apiBaseUrl" value="http://localhost:8000" required />
+          </label>
+          <label>
+            X-API-Key
+            <input id="apiKey" type="password" placeholder="partner_api_key" required />
+          </label>
+          <label>
+            Endpoint
+            <select id="endpoint">
+              <option value="/api/v1/series">/api/v1/series</option>
+              <option value="/api/v1/exclusive">/api/v1/exclusive</option>
+              <option value="/api/v1/genres">/api/v1/genres</option>
+            </select>
+          </label>
+          <button class="primary-button" type="submit">Fetch JSON</button>
+          <pre id="apiOutput">{ "status": "ready" }</pre>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Melolo Partner Gateway</span>
+      <span>Secure catalog distribution for sister sites.</span>
+    </footer>
+
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>
